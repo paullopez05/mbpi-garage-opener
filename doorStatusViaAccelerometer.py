@@ -22,7 +22,7 @@ while True:
     # Only send door status to Receiver if it changed 
     if statusChanged:
         radio.on()
-        radio.send('A')
+        radio.send(str(doorOpen))
         radio.off()
         statusChanged = False
     sleep(500)
