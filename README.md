@@ -33,22 +33,22 @@ sudo sh -c "echo 'deb http://deb.debian.org/debian/ unstable main' >> /etc/apt/s
 sudo sh -c "printf 'Package: *\nPin: release a=unstable\nPin-Priority: 90\n' >> /etc/apt/preferences.d/limit-unstable"
 ```
 
-Update to download the latest packages from these repos:
+Update to download the latest packages from these repos:  
 `sudo apt update`
 
-Install Wireguard:
+Install Wireguard:  
 `sudo apt install wireguard --assume-yes`
 
-Install QR Encode for adding transferring public, private, and server settings to phone.
+Install QR Encode for adding transferring public, private, and server settings to phone.  
 `sudo apt install qrencode`
 
-To avoid the 'RTNETLINK answers: Operation not supported' error install the kernel headers, dkms, and tools packages.
+To avoid the 'RTNETLINK answers: Operation not supported' error install the kernel headers, dkms, and tools packages.  
 `sudo apt install raspberrypi-kernel-headers wireguard-dkms wireguard-tools`
 
-Add an interface named wg0:
+Add an interface named wg0:  
 `ip link add dev wg0 type wireguard`
 
-Add the IP addressing for connecting peers:
+Add the IP addressing for connecting peers:  
 `ip address add dev wg0 10.200.200.1/24`
 
 Create public/private keys for the Raspberry Pi server, laptop, and two mobile phones
@@ -61,7 +61,7 @@ wg genkey | tee wg-mobile1-private.key | wg pubkey > wg-mobile1-public.key
 
 wg genkey | tee wg-mobile2-private.key | wg pubkey > wg-mobile2-public.key
 ```
-Create the configuration file
+Create the configuration file  
 `sudo nano /etc/wireguard/wg0.conf`
 
 Add the following to /etc/wireguard/wg0.conf
@@ -90,18 +90,19 @@ PublicKey = <wg-mobile2-public.key>
 AllowedIPs = 10.200.200.4/32
 ```
 
-Setup internal forwarding on the Pi to allowing access to other machines/devices on your network
+Setup internal forwarding on the Pi to allowing access to other machines/devices on your network  
 `sysctl net.ipv4.ip_forward=1`
 
-Make IP forwarding persistent:
+Make IP forwarding persistent:  
 `sudo nano /etc/sysctl.conf`
-then uncomment:
+
+Then uncomment:  
 \#net.ipv4.ip_forward=1
 
-Start the wireguard service:
+Start the wireguard service:  
 `sudo wg-quick up wg0`
 
-Set the wireguard service to start boot
+Set the wireguard service to start boot  
 `sudo systemctl enable wg-quick@wg0.service`
 
 ### Client mobile phone setup
@@ -109,7 +110,7 @@ A config needs to be added for each device that had a set of public/private keys
 
 In the same directory that the public/private keys create a conf file for each device. In this case mobile1.conf & mobile2.conf
 
-In the same directory where you have the public/private keys saved run:
+In the same directory where you have the public/private keys saved run:  
 `sudo nano mobile1.conf`
 
 Then paste the following config into mobile1.conf:
