@@ -19,10 +19,15 @@ Size: 432 MB
 
 ## Raspberry Pi (Server) setup
 Install Debian's public keys since Raspberry Pi OS doesn't trust Debian's package repo:  
-`sudo apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 04EE7237B7D453EC 648ACFD622F3D138`
+```bash
+sudo apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 04EE7237B7D453EC 648ACFD622F3D138`
+```
 
 Add package repos to the sources list:  
-`sudo sh -c "echo 'deb http://deb.debian.org/debian/ unstable main' >> /etc/apt/sources.list.d/unstable.list"`
+
+```bash
+sudo sh -c "echo 'deb http://deb.debian.org/debian/ unstable main' >> /etc/apt/sources.list.d/unstable.list"
+```
 
 ```bash
 sudo sh -c "printf 'Package: *\nPin: release a=unstable\nPin-Priority: 90\n' >> /etc/apt/preferences.d/limit-unstable"
