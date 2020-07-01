@@ -11,6 +11,7 @@ while True:
     if message is not None:
         counter += 1
         display.show(Image.NO, delay=500, clear=True)
+        print(message)
     if button_a.was_pressed():
         display.scroll(str(counter))
     if button_b.was_pressed():
