@@ -12,6 +12,8 @@ Additionally, the micro:bit logs ambient temperature to the local filesystem of 
 ## Software
 A MicroPython program written for the BBC micro:bit that detects board orientation which corresponds to garage door open/close status.  This app runs a continuous loop which sleeps for 500 ms every cycle to save battery power.  On each cycle, the is_gesture() method of the accelerometer will be queried to check is the board is 'face up' or 'face down' which will indicate that the garage door is open.  If the gesture value is either of these, the app will check to see if this status is different from the last known status and, if so, it will turn on the radio to send the updated status to the receiver micro:bit attached to the Raspberry Pi hub.
 
+Temperature is logged every 30 minutes to the local filesystem using the function logTemperature().
+
 ### Configuration Values
 The following line configures the micro:bit radio so that it can reliably communicate with the receiver micro:bit attached to the Raspberry Pi hub. 
 
@@ -24,3 +26,4 @@ See [BBC micro:bit Radio MicroPython Documentation](https://microbit-micropython
 
 Other configuation values:
 - **sleep:** Set to 500 ms so that we conserve battery power by not querying the sensors too frequently
+- **logTempInteval_min:** Set to 30 minutes
